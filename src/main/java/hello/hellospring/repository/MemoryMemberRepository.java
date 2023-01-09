@@ -4,7 +4,7 @@ import hello.hellospring.domain.Member;
 
 import java.util.*;
 
-public class MemoryMemberRepository implements MemberRepository{
+public class  MemoryMemberRepository implements MemberRepository{
 
     // 실무에선 동시성 문제가 있어서 ConcurrentHashMap<>을 써야 함
     private static Map<Long,Member> store = new HashMap<>();
@@ -39,5 +39,9 @@ public class MemoryMemberRepository implements MemberRepository{
         // 실무에서 리스트 많이 씀 -> 루프 돌리기 편함
         // store에 있는 값들 전체 반환
         return new ArrayList<>(store.values());
+    }
+
+    public void clearStore() {
+        store.clear();
     }
 }

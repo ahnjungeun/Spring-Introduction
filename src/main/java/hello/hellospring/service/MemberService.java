@@ -8,7 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    // 기존에 쓰던 코드
+    private final MemberRepository old_memberRepository = new MemoryMemberRepository();
+
+    // 위 코드를 test코드와 같은 객체를 사용하기 위해 아래와 같이 변경
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     // 주석쓰기 /** 치고 엔터
 
@@ -19,18 +27,18 @@ public class MemberService {
      * @return
      */
     public Long join(Member member) {
-        // 같은 이름은 회원가입이 불가능하게, 중복가입방지
-        Optional<Member> result = memberRepository.findByName(member.getName());
-        // result에 값이 있으면 람다 실행
-        result.ifPresent(m -> {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        });
-
-        // 개선 1 : Optional로 나오면 코드가 안 예쁨
-        memberRepository.findByName(member.getName()) // 이 값이 Optional이니까 바로 반환해서 사용
-                .ifPresent(m -> {
-                    throw new IllegalStateException("이미 존재하는 회원입니다.");
-                });
+//        // 같은 이름은 회원가입이 불가능하게, 중복가입방지
+//        Optional<Member> result = memberRepository.findByName(member.getName());
+//        // result에 값이 있으면 람다 실행
+//        result.ifPresent(m -> {
+//            throw new IllegalStateException("이미 존재하는 회원입니다.");
+//        });
+//
+//        // 개선 1 : Optional로 나오면 코드가 안 예쁨
+//        memberRepository.findByName(member.getName()) // 이 값이 Optional이니까 바로 반환해서 사용
+//                .ifPresent(m -> {
+//                    throw new IllegalStateException("이미 존재하는 회원입니다.");
+//                });
 
         // 개선 2 : 이런 비즈니스 로직은 메소드로 분리하는 것이 낫다.
         validateDuplicateMember(member); // 최종

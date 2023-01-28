@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceTest {
     // 기존에 쓰던 코드 (주석 후 실행 필수)
-    MemberService old_memberService = new MemberService();
-    MemoryMemberRepository old_memberRepository = new MemoryMemberRepository();
+//    MemberService old_memberService = new MemberService();
+//    MemoryMemberRepository old_memberRepository = new MemoryMemberRepository();
 
     // 위 코드에서 MemoryMemberRepository의 객체는 main코드와 test코드에서 동일하지 않다.
     // 같은 객체를 쓰려면 아래와 같이 변경 후, 의존성 주입을 해주면 된다.

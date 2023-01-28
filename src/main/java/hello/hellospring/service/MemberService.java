@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 public class MemberService {
     // 기존에 쓰던 코드
     private final MemberRepository old_memberRepository = new MemoryMemberRepository();
@@ -17,7 +17,7 @@ public class MemberService {
     // 위 코드를 test코드와 같은 객체를 사용하기 위해 아래와 같이 변경
     private final MemberRepository memberRepository;
 
-    @Autowired
+//    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }

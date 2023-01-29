@@ -4,8 +4,11 @@ import hello.hellospring.domain.Member;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class MemberController {
@@ -29,5 +32,12 @@ public class MemberController {
         memberService.join(m);
 
         return "redirect:/"; // 회원가입 후 홈화면으로 보냄
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> ms = memberService.findMembers();
+        model.addAttribute("members", ms);
+        return "members/memberList";
     }
 }
